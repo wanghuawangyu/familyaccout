@@ -101,8 +101,8 @@ class Subject(models.Model):
 
 class Detail(models.Model):
     detail_id=models.AutoField(primary_key=True,verbose_name='流水id')
-    detailDate=models.DateTimeField(auto_now_add=True,verbose_name='流水创建日期')
-    tradeDate=models.DateTimeField(auto_now_add=True,verbose_name='交易发生日期')
+    detailDate=models.DateTimeField(null=True,verbose_name='流水创建日期')
+    tradeDate=models.DateTimeField(null=True,verbose_name='交易发生日期')
     tradeNumber=models.BigIntegerField(verbose_name='交易编号')
     detailDescription=models.CharField(max_length=128,null=True,verbose_name='交易描述')
     detailAmount=models.DecimalField(max_digits=10,decimal_places=2,default=0,verbose_name='交易金额')
@@ -124,7 +124,7 @@ class Detail(models.Model):
 
 class Bill(models.Model):
     bill_id=models.AutoField(primary_key=True,verbose_name='账单id')
-    billDate=models.DateField(auto_now_add=True,verbose_name='账单日期')
+    billDate=models.DateField(null=False,verbose_name='账单日期')
     billAmount=models.DecimalField(max_digits=10,decimal_places=2,default=0,verbose_name='账单金额')
     billRepaymentDate=models.DateField(null=False,verbose_name='最后还款日期')
     isRepayment=models.BooleanField(default=False,verbose_name='是否还清')
@@ -142,9 +142,9 @@ class Installment(models.Model):
     installment_id=models.AutoField(primary_key=True,verbose_name='贷款记录id')
     installmentNumber=models.PositiveIntegerField(verbose_name='贷款编号')
     installmentDescription=models.CharField(max_length=128,null=True,verbose_name='贷款描述')
-    installmentDate=models.DateField(auto_now_add=True,verbose_name='贷款日期')
-    installmentStartDate=models.DateField(auto_now_add=True,verbose_name='贷款账目开始日期')
-    installmentEndDate=models.DateField(auto_now_add=True,verbose_name='贷款账目结束日期')
+    installmentDate=models.DateField(null=True,verbose_name='贷款日期')
+    installmentStartDate=models.DateField(null=True,verbose_name='贷款账目开始日期')
+    installmentEndDate=models.DateField(null=True,verbose_name='贷款账目结束日期')
     addDate = models.DateTimeField(auto_now_add=True, verbose_name='创建日期')
     installmentMonthNumner=models.SmallIntegerField(default=12,verbose_name='贷款期数')
     isAllowPrepayment=models.BooleanField(default=False,verbose_name='是否可以提前还款')
